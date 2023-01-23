@@ -1,4 +1,4 @@
-// LeetCode - First Unique Character in a String
+//LeetCode - First Unique Character in a String
 
 class Solution {
     public int firstUniqChar(String s) {
