@@ -1,0 +1,40 @@
+// Kth largest element in BST
+
+/*
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+    Node(int data)
+    {
+        this.data = data;
+        left=null;
+        right=null;
+    }
+}
+*/
+class Solution
+{
+    // return the Kth largest element in the given BST rooted at 'root'
+    int count = 0;
+    int res = 0;
+    public int kthLargest(Node root,int K)
+    {
+        traverse(root,K);
+        return res;
+    }
+    public void traverse(Node curr,int k){
+        if(curr.right!=null){
+            traverse(curr.right,k);
+        }
+        count++;
+        if(count==k){
+            res = curr.data;
+            return;
+        }
+        if(curr.left!=null){
+            traverse(curr.left,k);
+        }
+    }
+}
