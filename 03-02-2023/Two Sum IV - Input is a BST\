@@ -1,0 +1,74 @@
+// Two Sum IV - Input is a BST
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class BSTIterator {
+    Stack<TreeNode> stack = new Stack<>();
+    boolean before;
+    public BSTIterator(TreeNode root,boolean before) {
+        this.before = before;
+        pushAll(root);
+    }
+    
+    public int next() {
+        TreeNode curr = stack.pop();
+        if(before){
+            pushAll(curr.left);
+        }
+        else{
+            pushAll(curr.right);
+        }
+        return curr.val;
+    }
+    
+    public boolean hasNext() {
+        return stack.size()>0;
+    }
+    public void pushAll(TreeNode root){
+        if(before){
+            while(root!=null){
+                stack.push(root);
+                root = root.right;
+            }
+        }
+        else{
+            while(root!=null){
+                stack.push(root);
+                root = root.left;
+            }
+        } 
+    }
+}
+class Solution {
+    public boolean findTarget(TreeNode root, int target) {
+        BSTIterator start = new BSTIterator(root,false);
+        BSTIterator end = new BSTIterator(root,true);
+        int i = start.next();
+        int j = end.next();
+        while(i<j){
+            if(i+j==target){
+                return true;
+            }
+            else if(i+j<target){
+                i = start.next();
+            }
+            else{
+                j = end.next();
+            }
+        }
+        return false;
+    }
+}
