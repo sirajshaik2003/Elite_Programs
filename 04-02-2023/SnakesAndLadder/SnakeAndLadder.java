@@ -20,6 +20,7 @@ public class SnakeAndLadder {
         board[27] = 1;
         board[45] = 5;
         board[70] = 17;
+        board[99] = 1;
 
 
         boolean gameOver = false;
